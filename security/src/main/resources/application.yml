@@ -1,0 +1,22 @@
+server:
+  port: 8080
+  
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+   
+spring:
+  datasource:
+    driver-class-name: com.jdbc.cj.mysql.driver
+    url: jdbc:mysql://localhost:3306/mysecurity?serverTimezone=Asia/Seoul
+    username: jgm
+    password: jgm1234
+  
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
