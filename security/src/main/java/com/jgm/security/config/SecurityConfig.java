@@ -1,13 +1,21 @@
 package com.jgm.security.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
+	
+	@Bean
+	public BCryptPasswordEncoder encodePwd() {
+		return new BCryptPasswordEncoder();
+	}
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
@@ -19,6 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.and()
 		.formLogin()
 		.loginPage("/loginForm")
+		.loginProcessingUrl("/login") // login주소가 호출이 되면 spring security가 낚아채서 대신 로그인 진행시켜줌
 		.defaultSuccessUrl("/");
 	}
 }
